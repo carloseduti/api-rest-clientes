@@ -62,6 +62,12 @@ public class ClienteResource {
 	
 	@PutMapping("/cliente")
 	public Cliente atualizaProduto(@RequestBody Cliente cliente) {
+		for (Contato contato : cliente.getTelefones()) {
+			contato.setCliente(cliente);
+		}
+		for (Email email : cliente.getEmails()) {
+			email.setCliente(cliente);
+		}
 		return clienteRepository.save(cliente);
 	}
 }
